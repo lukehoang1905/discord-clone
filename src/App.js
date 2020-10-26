@@ -1,15 +1,14 @@
 import React from "react";
 
 import "./App.css";
-import CenterLayout from "./components/CenterLayout";
+import Chat from "./components/Chat";
 import SideBar from "./components/SideBar";
 
 function App() {
   return (
-    <div className="App">
-      <h1>ds</h1>
+    <div className="app">
       <SideBar />
-      <CenterLayout />
+      <Chat />
     </div>
   );
 }
