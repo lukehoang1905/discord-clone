@@ -14,20 +14,23 @@ import {
 import { Avatar } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import db, { auth } from "../firebase";
+import firebase from "firebase";
 
 const SideBar = () => {
   const user = useSelector((state) => state.user.user);
   const [channels, setChannels] = useState([]);
 
   useEffect(() => {
-    db.collection("channels").onSnapshot((snapshot) => {
-      setChannels(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          channel: doc.data(),
-        }))
-      );
-    });
+    db.collection("channels")
+      .orderBy("timestamp", "asc")
+      .onSnapshot((snapshot) => {
+        setChannels(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            channel: doc.data(),
+          }))
+        );
+      });
   }, []);
 
   const handleAddChannel = () => {
@@ -35,6 +38,7 @@ const SideBar = () => {
     if (channelName) {
       db.collection("channels").add({
         channelName: channelName,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
     }
   };
