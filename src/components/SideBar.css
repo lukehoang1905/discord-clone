@@ -16,10 +16,20 @@
 }
 .sidebar__channels {
   flex: 1;
+  overflow: scroll;
 }
 .sidebar__addChannel {
   cursor: pointer;
 }
 .sidebar__addChannel :hover {
   color: white;
+}
+
+.sidebar__channels::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar__channels {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

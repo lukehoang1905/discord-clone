@@ -10,13 +10,13 @@ import {
 import React from "react";
 import "./ChatHeader.css";
 
-const ChatHeader = () => {
+const ChatHeader = ({ channelName }) => {
   return (
     <div className="chatHeader">
       <div className="chatHeader__left">
         <h3>
           <span className="chatHeader__hash">#</span>
-          <p>Channel </p>
+          {channelName}
         </h3>
       </div>
       <div className="chatHeader__right">
