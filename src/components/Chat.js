@@ -7,6 +7,7 @@ import {
 import React from "react";
 import "./Chat.css";
 import ChatHeader from "./ChatHeader";
+import Message from "./Message";
 
 const Chat = () => {
   return (

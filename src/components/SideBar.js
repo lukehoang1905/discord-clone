@@ -1,29 +1,39 @@
 import React from "react";
 import "./SideBar.css";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import AddIcon from "@material-ui/icons/Add";
 import SidebarChannel from "./SidebarChannel";
-import SignalCellularAltIcon from "@material-ui/icons/SignalCellularAlt";
-import { Call, Headset, InfoOutlined, Mic, Settings } from "@material-ui/icons";
+import {
+  Call,
+  Headset,
+  InfoOutlined,
+  Mic,
+  Settings,
+  SignalCellularAlt,
+  ExpandMore,
+  Add,
+} from "@material-ui/icons";
 import { Avatar } from "@material-ui/core";
-import avatar from "../image/avatar.png";
+
+import { useSelector } from "react-redux";
+import { auth } from "../firebase";
 
 const SideBar = () => {
+  const user = useSelector((state) => state.user.user);
+
   return (
     <div className="sidebar">
       <div className="sidebar__top">
-        <h1>Luke Hoang</h1>
-        <ExpandMoreIcon />
+        <h1>{user.displayName}</h1>
+        <ExpandMore />
       </div>
 
       <div className="sidebar__channels">
         <div className="sidebar__channelsHeader">
           <div className="sidebar__header">
-            <ExpandMoreIcon />
+            <ExpandMore />
             <h4>Text Channel</h4>
           </div>
 
-          <AddIcon className="sidebar__addChannel" />
+          <Add className="sidebar__addChannel" />
         </div>
         <div className="sider__channelsList">
           <SidebarChannel />
@@ -34,10 +44,7 @@ const SideBar = () => {
       </div>
 
       <div className="sidebar__voice">
-        <SignalCellularAltIcon
-          className="sidebar__voiceIcons"
-          fontSize="large"
-        />
+        <SignalCellularAlt className="sidebar__voiceIcons" fontSize="large" />
         <div className="sidebar__voiceInfo">
           <h3>Voice Connected</h3>
           <p>Stream</p>
@@ -50,10 +57,10 @@ const SideBar = () => {
       </div>
 
       <div className="sidebar__profile">
-        <Avatar src={avatar} />
+        <Avatar onClick={() => auth.signOut()} src={user.photo} />
         <div className="sidebar__profileInfo">
-          <h3>@sss</h3>
-          <p>#this</p>
+          <h3>{user.displayName}</h3>
+          <p>#{user.uid.substring(0, 5)}</p>
         </div>
 
         <div className="sidebar__profileIcons">
